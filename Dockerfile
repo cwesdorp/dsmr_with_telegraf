@@ -25,7 +25,8 @@ RUN apt-get update && \
     echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | tee /etc/apt/sources.list.d/influxdata.list && \
     apt-get update && \
     apt-get install -y python3=3.11.\* telegraf=1.25.\* && \
-    usermod -d /home/telegraf telegraf
+    # Add telegraf user to dialout to access USB devices
+    usermod -d /home/telegraf -G telegraf,dialout telegraf
 
 # copy the telegraf config file
 COPY --chown=root:root telegraf.conf /etc/telegraf/telegraf.conf
