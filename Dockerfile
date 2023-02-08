@@ -30,7 +30,7 @@ RUN apt-get update && \
 
 # copy the telegraf config file
 COPY --chown=root:root telegraf.conf /etc/telegraf/telegraf.conf
-COPY --chown=root:root output_stdout.conf /etc/telegraf/telegraf.d/
+COPY --chown=root:root telegraf.d/output_stdout.conf /etc/telegraf/telegraf.d/
 
 # copy the dsmr dependencies and the script for telegraf
 COPY --from=builder /home/telegraf/.local /home/telegraf/.local

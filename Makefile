@@ -1,11 +1,15 @@
 image:
-	docker build --rm -t cwp/smt:1 .
-
-image-telegraf:
-	docker build --rm -t cwp/smt-telegraf:2 -f Dockerfile-telegraf .
+	docker build --rm -t cwesdorp/smart_meter_telegraf:latest
 
 run:
-	docker run --rm --device=/dev/ttyUSB0 -v "${PWD}/telegraf-influxdb_v2.conf:/etc/telegraf/telegraf.conf" --name=smart_meter -d cwp/smt-telegraf:2 
+	docker run -d --device=/dev/ttyUSB0 \
+	  --name=smart_meter \
+	  -v "${PWD}/telegraf.d:/etc/telegraf.d:ro" \
+	  cwesdorp/smart_meter_telegraf:latest
 
-run-test:
-	docker run --rm -t --device=/dev/ttyUSB0 -v "${PWD}/telegraf.conf:/etc/telegraf/telegraf.conf" --name=smart_meter -a STDOUT cwp/smt-telegraf:2 
+run-attached:
+	docker run -t -a STDOUT \
+	  --device=/dev/ttyUSB0 \
+	  --name=smart_meter \
+	  -v "${PWD}/telegraf.d:/etc/telegraf.d:ro" \
+	  cwesdorp/smart_meter_telegraf:latest
