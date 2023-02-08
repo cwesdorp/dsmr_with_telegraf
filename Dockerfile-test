@@ -1,9 +1,0 @@
-FROM alpine:3.17.1
-
-RUN apk update && \
-    apk add --no-cache python3=~3.9 py3-pip=~20.3
-
-RUN python3 -m pip install --no-cache dsmr_parser==0.33
-COPY ./dsmr.py /root
-
-CMD ["python3", "/root/dsmr.py"]
