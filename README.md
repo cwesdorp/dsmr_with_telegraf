@@ -12,7 +12,6 @@ Main components:
 
 * Telegraf: The Swiss army knife for metrics. Lots of plug-ins for data collection and writing with out of the box resilience for errors/unavailability of any components
 * DSMR Parser: reads DMSR protocol over USB and translates this into readible information
-* InfluxDB: data storage
 * Docker: To bundle Telegraf en DSMR 
 * P1 USB Cable: [search](https://duckduckgo.com/?q=p1+usb+kabel)
 
@@ -20,8 +19,7 @@ Main components:
 
 Required software:
 
-* Docker
-* InfluxDB
+* Docker - everything is packaged into one container
 
 
 ## Collected data
@@ -32,11 +30,11 @@ The input is the P1 USB Cable device.
 
 To adjust the script see the DSMR Parser documentation. DSMR Parser is pinned at version 0.33 as this was the available version during development.
 
-## InfluxDB
+## Storage
 
-Installation and running InfluxDB is left out of this project. Please refer to the InfluxDB website for [this](https://docs.influxdata.com/influxdb/v2.6/install/?t=Docker). 
+Installation and running InfluxDB is left out of this project. Pick any output plugin Telegraf has that suite your needs. 
 
-After installation create a bucket to store the data. Also create a [token](https://docs.influxdata.com/influxdb/v2.6/security/tokens/create-token/) to use in the Telegraf configuration as authentication.
+In case Influx is your choice, please refer to the InfluxDB website for [this](https://docs.influxdata.com/influxdb/v2.6/install/?t=Docker). After installation create a bucket to store the data. Also create a [token](https://docs.influxdata.com/influxdb/v2.6/security/tokens/create-token/) to use in the Telegraf configuration as authentication.
 
 
 ## Telegraf configuration
@@ -62,7 +60,7 @@ Update the configuration files in `telegraf.d` or provide your own folder to ove
 
 ## Other solutions 
 
-There are several other solutions on the market to connect to the P1 port of a meter and also facilitate storage and display. There are several vendors of USB cables, just [search](https://duckduckgo.com/?q=p1+usb+kabel). Some project I found (but didn't try) to read DSMR are
+There are several other solutions to connect to the P1 port of a meter and also facilitate storage and display. There are several vendors of USB cables, just [search](https://duckduckgo.com/?q=p1+usb+kabel). Some project I found (but didn't try) to read DSMR are
 
 * [DSMR Tools](https://dsmr.basjes.nl/)
 * [DSMR Reader](https://github.com/dsmrreader/dsmr-reader)
